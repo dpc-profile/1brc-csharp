@@ -1,0 +1,1 @@
+dotnet publish -c Release --no-restore .\1brc\1brc.csproj
