@@ -1,1 +1,1 @@
-hyperfine --warmup 2 -m 3 -M 5 ".\1brc\bin\Release\net6.0\1brc.exe C:\Users\user05\Downloads\measurements1b.txt" --show-output
+hyperfine --warmup 2 -m 3 -M 5 ".\1brc\bin\Release\win-x64\1brc.exe C:\Users\user05\Downloads\measurements1b.txt" --show-output

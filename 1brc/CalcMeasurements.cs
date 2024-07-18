@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Buffers;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -19,52 +20,49 @@ public class CalcMeasurements
     }
     private string CalcularTemperatura(string filePath)
     {
-        //LerArquivo(filePath);
-        //var arquivoByte = Load(filePath);
+        LerArquivo1(filePath);
+        //LerArquivo2(filePath);
 
-        //string fileContent = Encoding.UTF8.GetString(arquivoByte);
 
-        //int count = 0;
-        //foreach (Char caractere in fileContent)
-        //{
-        //    if (caractere == '\r') { count++; }
-        //}
-
-        long count = CountCharacterInFile(filePath);
-
-        Console.WriteLine(count);
         return "ola";
     }
 
-    private byte[] Load(string filename)
+    private void LerArquivo1(string filename)
     {
         byte[] data = null;
         using (FileStream fs = File.OpenRead(filename))
         {
-            data = new byte[fs.Length]; // Precisa dar um jeito nesse buffer
+            data = new byte[fs.Length/16]; // Precisa dar um jeito nesse buffer
             fs.Read(data, 0, data.Length);
         }
-        return data;
+
+        string fileContent = Encoding.UTF8.GetString(data);
+
+        int count = 0;
+        foreach (Char caractere in fileContent)
+        {
+            if (caractere == '\r') { count++; }
+        }
+
+        Console.WriteLine(count);
     }
 
-    private static long CountCharacterInFile(string filename)
+    private void LerArquivo2(string filename)
     {
-        long count = 0;
+        string line;
+        int count = 0;
 
-        using (FileStream fs = File.OpenRead(filename))
-        using (StreamReader reader = new StreamReader(fs))
+        using (StreamReader file = new StreamReader(filename))
         {
-            int currentChar;
-            while ((currentChar = reader.Read()) != -1)
+            while ((line = file.ReadLine()) != null)
             {
-                if (currentChar == '\r')
-                {
-                    count++;
-                }
+                count++;
             }
         }
 
-        return count;
+        Console.WriteLine(count);
+
     }
+
 }
 
