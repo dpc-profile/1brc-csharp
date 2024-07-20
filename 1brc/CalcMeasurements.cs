@@ -1,6 +1,4 @@
-﻿using System.Buffers;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Text;
 
 namespace _1brc;
@@ -20,8 +18,10 @@ public class CalcMeasurements
     }
     private string CalcularTemperatura(string filePath)
     {
-        LerArquivo1(filePath);
+        //LerArquivo1(filePath);
         //LerArquivo2(filePath);
+
+        LerArquivo3(filePath);
 
 
         return "ola";
@@ -43,7 +43,7 @@ public class CalcMeasurements
         {
             if (caractere == '\r') { count++; }
         }
-
+        
         Console.WriteLine(count);
     }
 
@@ -60,6 +60,27 @@ public class CalcMeasurements
             }
         }
 
+        Console.WriteLine(count);
+
+    }
+
+    private void LerArquivo3(string filename)
+    {        
+        int bufferSize = 1024 * 16384;
+        int count = 0;
+
+        using (FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+        {
+            byte[] buffer = new byte[bufferSize];
+            int bytesRead;
+            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                string text = System.Text.Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                count++;
+
+            }
+        }
         Console.WriteLine(count);
 
     }
