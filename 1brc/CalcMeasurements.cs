@@ -18,55 +18,14 @@ public class CalcMeasurements
     }
     private string CalcularTemperatura(string filePath)
     {
-        //LerArquivo1(filePath);
-        //LerArquivo2(filePath);
-
         LerArquivo3(filePath);
-
 
         return "ola";
     }
 
-    private void LerArquivo1(string filename)
-    {
-        byte[] data = null;
-        using (FileStream fs = File.OpenRead(filename))
-        {
-            data = new byte[fs.Length/16]; // Precisa dar um jeito nesse buffer
-            fs.Read(data, 0, data.Length);
-        }
-
-        string fileContent = Encoding.UTF8.GetString(data);
-
-        int count = 0;
-        foreach (Char caractere in fileContent)
-        {
-            if (caractere == '\r') { count++; }
-        }
-        
-        Console.WriteLine(count);
-    }
-
-    private void LerArquivo2(string filename)
-    {
-        string line;
-        int count = 0;
-
-        using (StreamReader file = new StreamReader(filename))
-        {
-            while ((line = file.ReadLine()) != null)
-            {
-                count++;
-            }
-        }
-
-        Console.WriteLine(count);
-
-    }
-
     private void LerArquivo3(string filename)
-    {        
-        int bufferSize = 1024 * 16384;
+    {
+        int bufferSize = 1024 * (1024 * 16); // 16MB
         int count = 0;
 
         using (FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read))
@@ -81,9 +40,8 @@ public class CalcMeasurements
 
             }
         }
+
         Console.WriteLine(count);
-
     }
-
 }
 
