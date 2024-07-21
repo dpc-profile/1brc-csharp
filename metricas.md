@@ -1,6 +1,6 @@
 ## Lendo arquivo
 #### Convertendo para string e contando semicolon usando for loop:
-- Media 33.826ms
+- Media 28.238ms | bufferSize 8MB
 ```csharp
 string text = System.Text.Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
@@ -12,7 +12,7 @@ for (int i = 0; i < text.Length; i++)
 ```
 
 #### Contando semicolon via caractere ASCII 
-- Media 14.479ms
+- Media 14.479ms | bufferSize 16MB
 ```csharp
 for (int i = 0; i < bytesRead; i++)
 {
