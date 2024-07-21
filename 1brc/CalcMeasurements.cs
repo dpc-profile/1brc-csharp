@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace _1brc;
@@ -25,7 +26,7 @@ public class CalcMeasurements
 
     private void LerArquivo3(string filename)
     {
-        int bufferSize = 1024 * (1024 * 16); // 16MB
+        int bufferSize = 1024 * (1024 * 4); // 4MB
         int count = 0;
 
         using (FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read))
@@ -34,9 +35,19 @@ public class CalcMeasurements
             int bytesRead;
             while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) > 0)
             {
-                string text = System.Text.Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                //for (int i = 0; i < bytesRead; i++)
+                //{
+                //    if (buffer[i] == 59) // 59 é o valor ASCII para ';'
+                //        count++;
+                //}
 
-                count++;
+                //string text = System.Text.Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                //for (int i = 0; i < text.Length; i++)
+                //{
+                //    if (text[i] == ';')
+                //        count++;
+                //}
 
             }
         }
